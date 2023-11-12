@@ -49,11 +49,12 @@ def group_scanner(log_queue, count_queue, proxy_iter, timeout,
                 if resp[:12] != b"HTTP/1.1 200":
                     break
                 resp = resp[resp.find(b"\r\n\r\n") + 4:]
-                while resp[-1] != 0:
-                    resp += sock.recv(1048576)
-                owner_status = parse_batch_response(
-                    decompress(resp, -15), gid_chunk_size)
-
+                try:
+                    while resp[-1] != 0:
+                        resp += sock.recv(1048576)
+                except:
+                    pass
+                owner_status = parse_batch_response(resp, gid_chunk_size)
                 for gid in gid_chunk:
                     if gid not in owner_status:
                         # Group is missing from the batch response.
@@ -84,7 +85,7 @@ def group_scanner(log_queue, count_queue, proxy_iter, timeout,
                     # Group is marked as tracked and doesn't have an owner.
                     # Request extra details and determine if it's claimable.
                     sock.send(
-                        b"GET /v1/groups/" + gid + b" HTTP/1.1\n"
+                        b"GET /v1/groups/" + gid.decode() + b" HTTP/1.1\n"
                         b"Host:groups.roblox.com\n"
                         b"\n")
                     resp = sock.recv(1048576)
