@@ -1,8 +1,5 @@
-# roblox-claimable-group-finder
-<p align="center"><img src="https://i.imgur.com/131wdCq.png" height="300" width="637"></p>
-
-# Don't waste your time
-If you're simply just looking to claim a couple groups, I have an [instance](https://www.roblox.com/games/7963219872) of this scanner running at ~25m RPM, feel free to use it.
+# Okay, WTF is this?
+This is my attempt at fixing h0nda's group finder. Simple as that. I cannot guarantee this will work all of the time and this will probably break every once in a while due to the hacky workarounds I used to fix the original code.
 
 # Features
 - High-performance scanning (up to 50M+ checks-per-minute)
